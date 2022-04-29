@@ -110,4 +110,19 @@ app.get("/statement/date", verifyExistsAccountCPF, (req, res) => {
   return res.json(statement)
 })
 
+app.put("/account", verifyExistsAccountCPF, (req, res) => {
+  const { name } = req.body;
+  const { customer } = req.body;
+
+  customer.name = name;
+
+  return res.status(201).send();
+})
+
+app.get("/account", verifyExistsAccountCPF, (req, res) => {
+  const { customer } = req;
+
+  return resjson(customer)
+})
+
 app.listen(3000, () => console.log("Server is running!! 🥸"))
