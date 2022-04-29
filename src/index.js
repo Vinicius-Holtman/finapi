@@ -125,4 +125,20 @@ app.get("/account", verifyExistsAccountCPF, (req, res) => {
   return resjson(customer)
 })
 
+app.delete("/account", verifyExistsAccountCPF, (req, res) => {
+  const { customer } = req;
+
+  customers.splice(customer, 1)
+
+  return res.status(200).json(customers)
+})
+
+app.get("/balance", verifyExistsAccountCPF, (req, res) => {
+  const { customer } = req;
+
+  const balance = getBalance(customer.statement)
+
+  return res.json(balance)
+})
+
 app.listen(3000, () => console.log("Server is running!! 🥸"))
